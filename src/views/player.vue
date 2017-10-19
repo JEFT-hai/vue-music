@@ -2,7 +2,6 @@
   <div class="player">
     <div class="bg">
       <img style="width:100%;height:100%;" :src="currentMusicItem.cover" />
-      <div class="img-mask"></div>
     </div>
     <Header>
       <div class="title">{{currentMusicItem.title}}</div>
