@@ -288,7 +288,7 @@ Footer{
     width:32px;
     height:32px;
     margin:0 auto;
-	background: url(../assets/image/icons.png) no-repeat;
+	background: url(../img/icons.png) no-repeat;
 	background-size: 32px auto;
 }
 .icon.prev {

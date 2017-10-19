@@ -54,7 +54,7 @@ export default {
 	},
 	_initScroll(){
 	      this.musicList = new BScroll(this.$refs.musicList, {
-	       hasVerticalScroll:true 
+	       click:true
 	      })
 	}
   },
@@ -63,7 +63,6 @@ export default {
     this.$nextTick(()=>{
       this._initScroll();
     })
-    console.log(this.$refs.musicList);
 
   }
 }
@@ -110,6 +109,7 @@ export default {
 	  width:100%;
 	  top:41px;
 	  bottom:51px;
+	  overflow:hidden;
 	  ul{
 	    li{
 	      line-height:40px;
