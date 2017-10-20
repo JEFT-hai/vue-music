@@ -53,7 +53,7 @@ export default {
     return {
       musiclist : MUSIC_LIST,
 	  currentMusicItem: MUSIC_LIST[0],
-	  isPlay:true,
+	  isPlay:false,
 	  progress: 0,
 	  volume: 0,
 	  time:0,
@@ -87,9 +87,7 @@ export default {
 		this.playNext()   
 	});
 	this.$nextTick(()=>{
-	  $('#player').jPlayer('setMedia',{
-    		mp3 : this.currentMusicItem.file
-      }).jPlayer('play');
+	  this.playMusic(this.currentMusicItem);
 	})
   },
   methods:{
