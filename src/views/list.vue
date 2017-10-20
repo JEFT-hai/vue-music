@@ -7,7 +7,7 @@
          <span class="repeatText">{{repeatText}}({{musiclist.length}})</span>
       </div>
       <div class="musicList" ref="musicList">
-        <ul ref="List">
+        <ul ref="ul">
           <li v-for="(item,index) in musiclist" :class="{active:(index==nowIndex),border:(index!=0)}" @click="changeIndex(index)">
              <span class="list-m-title">{{item.title}} - </span>
              <span class="list-m-artist">{{item.artist}}</span>
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      musiclist : {},
+      musiclist : MUSIC_LIST,
       newRepeat:''
     }
   },
@@ -53,17 +53,23 @@ export default {
 	  this.$store.commit('updateRepeat',this.newRepeat)
 	},
 	_initScroll(){
-	      this.musicList = new BScroll(this.$refs.musicList, {
-	       click:true
-	      })
+	      if(!this.musicList){
+	        this.musicList = new BScroll(this.$refs.musicList, {
+	         click:true
+	        })
+	      }else{
+	        this.musicList.refresh(); // 增减 刷新
+	      }
+	      
+	      console.log(this.musicList)
 	}
   },
-  created(){
-    this.musiclist = MUSIC_LIST;
-    this.$nextTick(()=>{
-      this._initScroll();
-    })
-
+  watch:{
+    listShow(){
+      this.$nextTick(()=>{
+        this._initScroll();
+      })
+    }
   }
 }
 </script>
@@ -85,8 +91,6 @@ export default {
 	z-index:99;
 	overflow:hidden;
 	.list-repeat,{
-	  position:absolute;
-	  top:0;
 	  width:100%;
 	  line-height:40px;
 	  height:40px;
@@ -105,15 +109,18 @@ export default {
 	  }
 	}
 	.musicList{
-	  position:absolute;
 	  width:100%;
-	  top:41px;
-	  bottom:51px;
+	  position:absolute;
+      top:41px;
+      bottom:51px;
 	  overflow:hidden;
 	  ul{
+	    width:100%;
+	    min-height: 350px;
 	    li{
 	      line-height:40px;
 	      height:40px;
+	      width:100%;
 	      padding-left:8px;
 	      .list-m-artist{
 	        font-size:13px;
@@ -123,7 +130,6 @@ export default {
 	    li.active{
 	      color:red;
 	      .list-m-artist{
-	        font-size:13px;
 	        color:red;
 	      }
 	    }

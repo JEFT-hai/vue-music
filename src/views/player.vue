@@ -176,17 +176,6 @@ to {transform: rotate(360deg);}
 		height:100%;
 		background:#000;
 		filter:blur(20px);
-		.img-mask{
-		    position:absolute;
-		    top:0;
-		    left:0;
-		    bottom:0;
-		    right:0;
-			width:100%;
-			height:100%;
-			background:#000;
-			opacity:0.35;
-		}
 	}
 	Header{
 	  .title,.artist{
