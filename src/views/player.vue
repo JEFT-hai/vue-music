@@ -74,9 +74,6 @@ export default {
 			supplied : 'mp3',
 			wmode: 'window'
 	});
-	this.$nextTick(()=>{
-	  this.playMusic(this.currentMusicItem);
-	})
 	$('#player').bind($.jPlayer.event.timeupdate, (e)=>{
 		/*总时间*/
 		this.duration=e.jPlayer.status.duration;
@@ -89,6 +86,11 @@ export default {
 	$('#player').bind($.jPlayer.event.ended,(e)=>{
 		this.playNext()   
 	});
+	this.$nextTick(()=>{
+	  $('#player').jPlayer('setMedia',{
+    		mp3 : this.currentMusicItem.file
+      }).jPlayer('play');
+	})
   },
   methods:{
     playMusic(musicItem){
