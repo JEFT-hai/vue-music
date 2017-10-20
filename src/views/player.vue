@@ -166,7 +166,7 @@ to {transform: rotate(360deg);}
 	width:100%;
 	height:100%;
 	.bg{
-	    position:absolute;
+	    position:fixed;
 	    z-index:-1;
 	    top:0;
 	    left:0;
@@ -174,8 +174,9 @@ to {transform: rotate(360deg);}
 	    right:0;
 		width:100%;
 		height:100%;
-		background:#000;
-		filter:blur(20px);
+		img{
+		  filter:blur(20px);
+		}
 	}
 	Header{
 	  .title,.artist{
