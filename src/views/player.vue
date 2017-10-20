@@ -71,9 +71,8 @@ export default {
   },
   mounted(){
     $('#player').jPlayer({
-			supplied : 'mp3',
-			wmode : 'window'
-		});
+			supplied : 'mp3'
+	});
 	this.playMusic(this.currentMusicItem);
 	$('#player').bind($.jPlayer.event.timeupdate, (e)=>{
 		/*总时间*/
