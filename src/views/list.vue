@@ -44,6 +44,7 @@ export default {
   methods:{
     changeIndex(index){
       this.$store.commit('updateIndex',index);
+      this.$emit('Play')
     },
     closeList(){
       this.$emit('closeList');
@@ -60,8 +61,6 @@ export default {
 	      }else{
 	        this.musicList.refresh(); // 增减 刷新
 	      }
-	      
-	      console.log(this.musicList)
 	}
   },
   watch:{

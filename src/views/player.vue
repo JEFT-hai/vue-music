@@ -38,7 +38,7 @@
       <div class="duration">{{Aduration}}</div>
     </div>
 
-    <List :listShow="listShow" @closeList="changeListShow" />
+    <List :listShow="listShow" @closeList="changeListShow" @Play="PlayTrue" />
     <div v-show="listShow" @click="changeListShow" class="list-mask"></div>
   </div>
 </template>
@@ -71,9 +71,12 @@ export default {
   },
   mounted(){
     $('#player').jPlayer({
-			supplied : 'mp3'
+			supplied : 'mp3',
+			wmode: 'window'
 	});
-	this.playMusic(this.currentMusicItem);
+	this.$nextTick(()=>{
+	  this.playMusic(this.currentMusicItem);
+	})
 	$('#player').bind($.jPlayer.event.timeupdate, (e)=>{
 		/*总时间*/
 		this.duration=e.jPlayer.status.duration;
@@ -98,6 +101,9 @@ export default {
       this.isPlay ? $('#player').jPlayer('pause') : $('#player').jPlayer('play');
 	  this.isPlay=!this.isPlay
     },
+    PlayTrue(){
+      this.isPlay = true;
+    },
     playNext(){
         let index = this.nowIndex;
         let length=this.musiclist.length;
@@ -110,6 +116,7 @@ export default {
         }
 		this.playMusic(this.musiclist[this.newIndex])
 		this.$store.commit('updateIndex',this.newIndex)
+		this.isPlay = true;
 	},
 	playPrev(){
         let index = this.nowIndex;
@@ -211,6 +218,9 @@ to {transform: rotate(360deg);}
 	       overflow:hidden;
 	       animation:rotate 20s infinite linear;
 	   }
+	   .stop{
+	   	   animation-play-state: paused;
+	   }
 	}
 	.list-mask{
 		position:fixed;
@@ -227,9 +237,7 @@ to {transform: rotate(360deg);}
 
 
 
-.stop{
-	animation-play-state: paused;
-}
+
 .cover img{
 	width:100%;
 
@@ -299,7 +307,6 @@ Footer{
 .icon.pause {
     background-position: 0 -80px;
     margin-left:-3px;
-
 }
 .icon.repeat-once {
     background-position: 0 -128px;
